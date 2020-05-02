@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 const port = 4001;
+const { Pool, Client } = require("pg");
+const connectionString =
+  "postgressql://postgres:demo1234@localhost:5432/kobyconrad";
+
+const client = new Client({
+  connectionString: connectionString,
+});
+
+client.connect();
 
 // tells my server to listen for GET/POST/w.e requests at const port
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
@@ -10,6 +19,8 @@ app.get("/", (req, res) => {
   console.log("triggered GET request");
   res.end();
 });
+
+// GET (req) client => server => database || (res) database => server => client
 
 // okay Koby time to build your paths
 // 1. receives data, saves it to database
@@ -23,6 +34,10 @@ app.get("/", (req, res) => {
 app.get("/read-all", (req, res) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   console.log("triggered /read-all");
+  client.query("SELECT text FROM notes", (err, res) => {
+    console.log(res);
+    client.end();
+  });
   //   console.log(res);
   res.end();
 });
