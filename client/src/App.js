@@ -18,13 +18,11 @@ function App() {
         <button
           onClick={() => {
             console.log("read");
-            xhr.open("GET", "http://localhost:4001/read-all");
-            // send the request
-            xhr.send();
-            // client.query("SELECT text FROM notes", (err, res) => {
-            //   console.log(res);
-            //   client.end();
-            // });
+            fetch("http://localhost:4001/read-all")
+              .then((res) => res.json())
+              .then((val) => {
+                console.log(val);
+              });
           }}
         >
           read
