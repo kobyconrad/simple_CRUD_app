@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import NoteBlock from "./components/noteBlock";
 
 function App() {
-  var xhr = new XMLHttpRequest();
+  console.log("render");
+  const [state, setState] = useState([{ text: "loading text" }]);
+
+  // sends get request to express which sends back note data from postgres then saves to state
+  fetch("http://localhost:4001/read-all")
+    .then((res) => res.json())
+    .then((val) => {
+      if (JSON.stringify(val) !== JSON.stringify(state)) {
+        setState(val);
+      }
+    });
+
+  const mappedNotes = state.map((item) => {
+    return <NoteBlock text={item.text} />;
+  });
 
   return (
     <div className="App">
@@ -18,24 +32,12 @@ function App() {
         </button>
         <button
           onClick={() => {
-            console.log("read");
-            fetch("http://localhost:4001/read-all")
-              .then((res) => res.json())
-              .then((val) => {
-                console.log(val);
-              });
-          }}
-        >
-          read
-        </button>
-        <button
-          onClick={() => {
             console.log("delete");
           }}
         >
           delete
         </button>
-        <NoteBlock text={"Hello I am the props text!"} />
+        {mappedNotes}
       </div>
     </div>
   );

@@ -35,7 +35,8 @@ function NoteBlock(props) {
           width: 75%;
           min-height: 60px;
           margin-top: 10px;
-          padding: 20px;
+          padding: 10px 20px 10px 20px;
+          font-size: 22px;
         }
         .textContainer {
           width: 100%;
