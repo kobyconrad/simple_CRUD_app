@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
+import NoteBlock from "./components/noteBlock";
 
 function App() {
   var xhr = new XMLHttpRequest();
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <h2>Hello this is my Simple CRUD App :)</h2>
         <button
           onClick={() => {
@@ -34,7 +35,8 @@ function App() {
         >
           delete
         </button>
-      </header>
+        <NoteBlock text={"Hello I am the props text!"} />
+      </div>
     </div>
   );
 }
