@@ -16,7 +16,7 @@ function App() {
     });
 
   const mappedNotes = state.map((item) => {
-    return <NoteBlock text={item.text} />;
+    return <NoteBlock text={item.text} key={`${Math.random() * 100}`} />;
   });
 
   return (

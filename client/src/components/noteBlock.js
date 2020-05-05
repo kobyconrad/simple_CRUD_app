@@ -34,7 +34,7 @@ function NoteBlock(props) {
           border-radius: 4px;
           width: 75%;
           min-height: 60px;
-          margin-top: 10px;
+          margin-top: 20px;
           padding: 10px 20px 10px 20px;
           font-size: 22px;
         }
