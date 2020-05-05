@@ -6,17 +6,24 @@ function App() {
   console.log("render");
   const [state, setState] = useState([{ text: "loading text" }]);
 
-  // sends get request to express which sends back note data from postgres then saves to state
+  // READ sends get request to express which sends back note data from postgres then saves to state
   fetch("http://localhost:4001/read-all")
     .then((res) => res.json())
     .then((val) => {
+      console.log(val);
       if (JSON.stringify(val) !== JSON.stringify(state)) {
         setState(val);
       }
     });
 
   const mappedNotes = state.map((item) => {
-    return <NoteBlock text={item.text} key={`${Math.random() * 100}`} />;
+    return (
+      <NoteBlock
+        text={item.text}
+        table_id={item.table_id}
+        key={`${Math.random() * 100}`}
+      />
+    );
   });
 
   return (

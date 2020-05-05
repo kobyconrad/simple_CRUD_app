@@ -19,7 +19,18 @@ function NoteBlock(props) {
         <div
           className="deleteSVG"
           onClick={() => {
-            console.log("delete");
+            console.log("delete" + ` ${props.table_id}`);
+
+            fetch("http://localhost:4001/delete", {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ body: 123 }),
+            }).then((res) => {
+              console.log(res);
+            });
           }}
         >
           <XSquare color="#F2F2F2" size={24} />
