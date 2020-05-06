@@ -1,5 +1,7 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+const cors = require("cors");
 const port = 4001;
 const { Pool, Client } = require("pg");
 const connectionString =
@@ -13,7 +15,13 @@ client.connect();
 
 // tells my server to listen for GET/POST/w.e requests at const port
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello World! Again. Wooo new code.");
@@ -32,7 +40,7 @@ app.get("/read-all", (req, response) => {
 });
 
 app.post("/delete", (req, res) => {
-  console.log(req.body);
+  console.log("body", req.body);
 
   res.send("delete response");
 });
