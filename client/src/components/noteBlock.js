@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { XSquare, Edit } from "react-feather";
 
 function NoteBlock(props) {
+  const [state, setState] = useState(1);
+
   return (
     <div className="componentContainer">
       <div className="textContainer">{props.text}</div>
@@ -22,14 +24,14 @@ function NoteBlock(props) {
             console.log("delete" + ` ${props.table_id}`);
 
             fetch("http://localhost:4001/delete", {
-              method: "POST",
-              mode: "no-cors",
+              method: "POST", // or 'PUT'
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ body: 123 }),
+              body: JSON.stringify({ table_id: props.table_id }),
             }).then((res) => {
               console.log(res);
+              window.location.reload(false);
             });
           }}
         >

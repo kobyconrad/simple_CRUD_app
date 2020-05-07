@@ -40,7 +40,13 @@ app.get("/read-all", (req, response) => {
 });
 
 app.post("/delete", (req, res) => {
-  console.log("body", req.body);
+  client.query(
+    `DELETE FROM notes WHERE table_id='${req.body.table_id}'`,
+    (err, res) => {
+      console.log(res);
+      client.end();
+    }
+  );
 
   res.send("delete response");
 });

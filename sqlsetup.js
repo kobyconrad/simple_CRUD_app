@@ -21,13 +21,13 @@ client.connect();
 //   client.end();
 // });
 
-// client.query(
-//   "INSERT INTO notes(text) VALUES ('hello i am a note again')",
-//   (err, res) => {
-//     console.log("res: ", res);
-//     client.end();
-//   }
-// );
+client.query(
+  "INSERT INTO notes(text) VALUES ('hello i am a note again')",
+  (err, res) => {
+    console.log("res: ", res);
+    client.end();
+  }
+);
 
 // // client.query("SELECT text FROM notes", (err, res) => {
 // //   console.log(res);
@@ -47,10 +47,11 @@ client.connect();
 //   client.end();
 // });
 
-client.query("DELETE FROM notes WHERE table_id='2'", (err, res) => {
-  console.log(res);
-  client.end();
-});
+// DELETE
+// client.query("DELETE FROM notes WHERE table_id='2'", (err, res) => {
+//   console.log(res);
+//   client.end();
+// });
 
 // client.query(
 //   "ALTER TABLE notes ADD table_id SERIAL PRIMARY KEY",
