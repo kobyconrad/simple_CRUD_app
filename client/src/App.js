@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import NoteBlock from "./components/noteBlock";
+import InputContainer from "./components/inputContainer";
 
 function App() {
   console.log("render");
@@ -30,29 +31,7 @@ function App() {
     <div className="App">
       <div className="App-header">
         <h2>Hello this is my Simple CRUD App :)</h2>
-        <button
-          onClick={() => {
-            fetch("http://localhost:4001/create", {
-              method: "POST", // or 'PUT'
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ text: "hello I am a note" }),
-            }).then((res) => {
-              console.log(res);
-              window.location.reload(false);
-            });
-          }}
-        >
-          create
-        </button>
-        <button
-          onClick={() => {
-            console.log("delete");
-          }}
-        >
-          delete
-        </button>
+        <InputContainer />
         {mappedNotes}
       </div>
     </div>
