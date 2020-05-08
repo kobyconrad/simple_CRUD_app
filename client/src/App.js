@@ -32,7 +32,16 @@ function App() {
         <h2>Hello this is my Simple CRUD App :)</h2>
         <button
           onClick={() => {
-            console.log("create");
+            fetch("http://localhost:4001/create", {
+              method: "POST", // or 'PUT'
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ text: "hello I am a note" }),
+            }).then((res) => {
+              console.log(res);
+              window.location.reload(false);
+            });
           }}
         >
           create

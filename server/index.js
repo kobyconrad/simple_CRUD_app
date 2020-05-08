@@ -44,9 +44,21 @@ app.post("/delete", (req, res) => {
     `DELETE FROM notes WHERE table_id='${req.body.table_id}'`,
     (err, res) => {
       console.log(res);
-      client.end();
     }
   );
 
   res.send("delete response");
+});
+
+app.post("/create", (req, response) => {
+  response.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  console.log("triggered /create");
+
+  client.query(
+    `INSERT INTO notes(text) VALUES ('${req.body.text}')`,
+    (err, res) => {
+      console.log("res: ", res);
+    }
+  );
+  res.send("create response");
 });
