@@ -21,13 +21,13 @@ client.connect();
 //   client.end();
 // });
 
-client.query(
-  "INSERT INTO notes(text) VALUES ('hello i am a note again')",
-  (err, res) => {
-    console.log("res: ", res);
-    client.end();
-  }
-);
+// client.query(
+//   "INSERT INTO notes(text) VALUES ('hello i am a note again')",
+//   (err, res) => {
+//     console.log("res: ", res);
+//     client.end();
+//   }
+// );
 
 // // client.query("SELECT text FROM notes", (err, res) => {
 // //   console.log(res);
@@ -64,3 +64,14 @@ client.query(
 // CREATE TABLE notes(text varchar(225))
 // INSERT INTO notes(text) VALUES (state/value)
 // SELECT text FROM notes
+
+// UPDATE
+// client.query('UPDATE notes SET text = "value" WHERE table_id="3"')
+
+client.query(
+  "UPDATE notes SET text='updated text note' WHERE table_id='44'",
+  (err, res) => {
+    console.log(res);
+    client.end();
+  }
+);

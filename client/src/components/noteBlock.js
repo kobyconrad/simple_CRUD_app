@@ -44,6 +44,16 @@ function NoteBlock(props) {
 
             if (icon === "save") {
               setIcon("edit");
+              fetch("http://localhost:4001/update", {
+                method: "POST", // or 'PUT'
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text: state, table_id: props.table_id }),
+              }).then((res) => {
+                console.log(res);
+                window.location.reload(false);
+              });
             } else {
               setIcon("save");
             }

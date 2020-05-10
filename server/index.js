@@ -62,3 +62,21 @@ app.post("/create", (req, response) => {
   );
   res.send("create response");
 });
+
+app.post("/update", (req, res) => {
+  console.log(req.body.text);
+  console.log(req.body.table_id);
+
+  // client.query("SELECT text, table_id FROM notes", (err, res) => {
+  //   console.log(res);
+  // });
+
+  client.query(
+    `UPDATE notes SET text='${req.body.text}' WHERE table_id='${req.body.table_id}'`,
+    (err, res) => {
+      console.log(res);
+    }
+  );
+
+  res.send("update response");
+});
