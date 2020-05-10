@@ -41,7 +41,8 @@ app.get("/read-all", (req, response) => {
 
 app.post("/delete", (req, res) => {
   client.query(
-    `DELETE FROM notes WHERE table_id='${req.body.table_id}'`,
+    `DELETE FROM notes WHERE table_id=$1`,
+    [req.body.table_id],
     (err, res) => {
       console.log(res);
     }
@@ -55,7 +56,8 @@ app.post("/create", (req, response) => {
   console.log("triggered /create");
 
   client.query(
-    `INSERT INTO notes(text) VALUES ('${req.body.text}')`,
+    `INSERT INTO notes(text) VALUES ($1)`,
+    [req.body.text],
     (err, res) => {
       console.log("res: ", res);
     }
@@ -64,15 +66,9 @@ app.post("/create", (req, response) => {
 });
 
 app.post("/update", (req, res) => {
-  console.log(req.body.text);
-  console.log(req.body.table_id);
-
-  // client.query("SELECT text, table_id FROM notes", (err, res) => {
-  //   console.log(res);
-  // });
-
   client.query(
-    `UPDATE notes SET text='${req.body.text}' WHERE table_id='${req.body.table_id}'`,
+    `UPDATE notes SET text=$1 WHERE table_id=$2`,
+    [req.body.text, req.body.table_id],
     (err, res) => {
       console.log(res);
     }
