@@ -1,20 +1,55 @@
 import React, { useState } from "react";
-import { XSquare, Edit } from "react-feather";
+import { XSquare, Edit, Save } from "react-feather";
 
 function NoteBlock(props) {
-  const [state, setState] = useState(1);
+  const [state, setState] = useState(props.text);
+  const [disabled, setDisabled] = useState(true);
+  const [icon, setIcon] = useState("edit");
+
+  // state of the display text
+  // state of the text area
+
+  function handleChange(event) {
+    setState(event.target.value);
+  }
+
+  function handleIcons() {
+    if (icon === "edit") {
+      return <Edit color="#F2F2F2" size={24} />;
+    } else {
+      return <Save color="#F2F2F2" size={24} />;
+    }
+  }
+
+  const currentIcon = handleIcons();
 
   return (
     <div className="componentContainer">
-      <div className="textContainer">{props.text}</div>
+      <div className="textContainer">
+        {/* {state} */}
+        <textarea
+          placeholder="Write your message here!"
+          type="text"
+          value={state}
+          onChange={handleChange}
+          disabled={disabled}
+        ></textarea>
+      </div>
       <div className="editContainer">
         <div
           className="editSVG"
           onClick={() => {
             console.log("edit");
+            setDisabled(!disabled);
+
+            if (icon === "save") {
+              setIcon("edit");
+            } else {
+              setIcon("save");
+            }
           }}
         >
-          <Edit color="#F2F2F2" size={24} />
+          {currentIcon}
         </div>
       </div>
       <div className="deleteContainer">
@@ -46,12 +81,16 @@ function NoteBlock(props) {
           border: 2px solid #f2f2f2;
           border-radius: 4px;
           width: 75%;
-          min-height: 60px;
           margin-top: 20px;
           padding: 10px 20px 10px 20px;
           font-size: 22px;
         }
         .textContainer {
+          width: 100%;
+          display: flex;
+          align-items: left;
+        }
+        textarea {
           width: 100%;
           display: flex;
           align-items: left;

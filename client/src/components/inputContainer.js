@@ -54,7 +54,7 @@ function InputContainer() {
         }
         textarea {
           width: 95%;
-          min-height: 100px;
+          min-height: 60px;
           font-size: 24px;
           padding: 10px;
           outline: none;
