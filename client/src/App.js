@@ -32,8 +32,17 @@ function App() {
       <div className="App-header">
         <h2>Hello this is my Simple CRUD App :)</h2>
         <InputContainer />
-        {mappedNotes}
+        <div className="mappedContainer">{mappedNotes}</div>
       </div>
+      <style jsx>{`
+        .mappedContainer {
+          display: flex;
+          flex-direction: column-reverse;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+      `}</style>
     </div>
   );
 }
